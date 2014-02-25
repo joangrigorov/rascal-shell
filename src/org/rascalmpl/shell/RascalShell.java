@@ -84,15 +84,6 @@ public class RascalShell {
 		running = true;
 	}
 	
-	public RascalShell(InputStream stdin, PrintWriter stderr, PrintWriter stdout) throws IOException {
-		console = new ConsoleReader(stdin, new PrintWriter(stdout));
-		GlobalEnvironment heap = new GlobalEnvironment();
-		ModuleEnvironment root = heap.addModule(new ModuleEnvironment(ModuleEnvironment.SHELL_MODULE, heap));
-		evaluator = new Evaluator(ValueFactoryFactory.getValueFactory(), stderr, stdout, root, heap);
-		importPrelude();
-		running = true;
-	}
-	
 	public RascalShell(InputStream stdin, PrintWriter stderr, PrintWriter stdout, List<ClassLoader> classLoaders, RascalURIResolver uriResolver) throws IOException {
 		console = new ConsoleReader(stdin, new PrintWriter(stdout));
 		GlobalEnvironment heap = new GlobalEnvironment();
