@@ -1,6 +1,6 @@
 package org.rascalmpl.shell;
 /*******************************************************************************
- * Copyright (c) 2009-2011 CWI
+ * Copyright (c) 2009-2014 CWI
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -68,38 +68,21 @@ public class RascalShell {
 	private static final boolean PRINTCOMMANDTIME = false;
 	
 	private final ConsoleReader console;
-	private final Evaluator evaluator;
 	private volatile boolean running;
 	
 	// TODO: cleanup these constructors.
 	public RascalShell() throws IOException {
 		console = new ConsoleReader();
-		GlobalEnvironment heap = new GlobalEnvironment();
-		ModuleEnvironment root = heap.addModule(new ModuleEnvironment(ModuleEnvironment.SHELL_MODULE, heap));
-		PrintWriter stderr = new PrintWriter(System.err);
-		PrintWriter stdout = new PrintWriter(System.out);
-		evaluator = new Evaluator(ValueFactoryFactory.getValueFactory(), stderr, stdout, root, heap);
-		evaluator.addRascalSearchPathContributor(StandardLibraryContributor.getInstance());
-		importPrelude();
 		running = true;
 	}
 	
 	public RascalShell(InputStream stdin, PrintWriter stderr, PrintWriter stdout, List<ClassLoader> classLoaders, RascalURIResolver uriResolver) throws IOException {
 		console = new ConsoleReader(stdin, new PrintWriter(stdout));
-		GlobalEnvironment heap = new GlobalEnvironment();
-		ModuleEnvironment root = heap.addModule(new ModuleEnvironment(ModuleEnvironment.SHELL_MODULE, heap));
-		evaluator = new Evaluator(ValueFactoryFactory.getValueFactory(), stderr, stdout, root, heap, classLoaders, uriResolver);
-		importPrelude();
 		running = true;
 	}
 	
-	private void importPrelude(){
-		//synchronized(evaluator){
-		//	evaluator.doImport(null, "Prelude");
-		//}
-	}
-	
 	public void run() throws IOException {
+	  Evaluator evaluator = getDefaultEvaluator();
 		StringBuilder input = new StringBuilder();
 		String line;
 		
@@ -122,9 +105,9 @@ public class RascalShell {
 					
 					input.append((input.length() > 0 ? "\n" : "") + line);
 					prompt = ReadEvalPrintDialogMessages.CONTINUE_PROMPT;
-				} while (!completeStatement(input.toString()));
+				} while (!completeStatement(evaluator, input.toString()));
 
-				String output = handleInput(input.toString());
+				String output = handleInput(evaluator, input.toString());
 				console.printString(output);
 				console.printNewline();
 			}
@@ -150,16 +133,7 @@ public class RascalShell {
 		}
 	}
 	
-	public synchronized void stop(){
-		running = false;
-		evaluator.interrupt();
-	}
-	
-	public Evaluator getEvaluator() {
-		return evaluator;
-	}
-	
-	private String handleInput(String statement){
+	private String handleInput(Evaluator evaluator, String statement){
 		Timing tm = new Timing();
 		tm.start();
 		Result<IValue> value = evaluator.eval(null, statement, URIUtil.rootScheme("prompt"));
@@ -180,7 +154,7 @@ public class RascalShell {
 		return ((v != null) ? value.toString(LINE_LIMIT) + (PRINTCOMMANDTIME ? "\n (" + duration + "ms)" : "") : null);
 	}
 
-	private boolean completeStatement(String command) throws FactTypeUseException {
+	private boolean completeStatement(Evaluator evaluator, String command) throws FactTypeUseException {
 		try {
 			evaluator.parseCommand(null, command, URIUtil.rootScheme("prompt"));
 		}
@@ -310,6 +284,7 @@ public class RascalShell {
 		PrintWriter stdout = new PrintWriter(System.out);
 		IValueFactory vf = ValueFactoryFactory.getValueFactory();
 		Evaluator evaluator = new Evaluator(vf, stderr, stdout, root, heap);
+	  evaluator.addRascalSearchPathContributor(StandardLibraryContributor.getInstance());
 		return evaluator;
 	}
 	
