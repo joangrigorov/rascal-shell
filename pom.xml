@@ -2,10 +2,24 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>org.rascalmpl</groupId>
+	<parent>
+		<relativePath>../rascal-pom-parent/pom.xml</relativePath>
+		<groupId>org.rascalmpl</groupId>
+		<artifactId>rascal-pom-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>rascal-shell</artifactId>
-	<version>0.6.2-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>0.6.2.qualifier</version>
+	<packaging>eclipse-plugin</packaging>
+
+	<repositories>
+		<repository>
+			<id>jline</id>
+			<name>JLine Project Repository</name>
+			<url>http://jline.sourceforge.net/m2repo</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -75,7 +89,7 @@
 						<phase>package</phase>
 						<configuration>
 							<target name="copy and rename file">
-								<copy file="${project.build.directory}/${pom.artifactId}-${project.version}.${project.packaging}" tofile="${pom.artifactId}-current.${project.packaging}" />
+								<copy file="${project.build.directory}/${project.artifactId}-${project.version}.jar" tofile="${project.artifactId}-current.jar" />
 							</target>
 						</configuration>
 						<goals>
@@ -88,14 +102,9 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>jline</id>
-			<name>JLine Project Repository</name>
-			<url>http://jline.sourceforge.net/m2repo</url>
-		</repository>
-	</repositories>
+	<!-- Used to trigger upstream projects in Jenkins  -->
 	<dependencies>
+		<!-- Rascal-Shell MANIFEST.MF Dependencies -->
 		<dependency>
 			<groupId>jline</groupId>
 			<artifactId>jline</artifactId>
