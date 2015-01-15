@@ -75,7 +75,6 @@
 			<!-- 
 				Skip installation / deployment of shaded JAR.
 				Else a lot of 'duplicate classes' warnings would be displayed. 
-			 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -92,7 +91,8 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-
+			 -->
+			 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
