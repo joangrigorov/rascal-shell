@@ -1,4 +1,3 @@
-package org.rascalmpl.shell;
 /*******************************************************************************
  * Copyright (c) 2009-2014 CWI
  * All rights reserved. This program and the accompanying materials
@@ -13,7 +12,7 @@ package org.rascalmpl.shell;
  *   * Paul Klint - Paul.Klint@cwi.nl - CWI
  *   * Arnold Lankamp - Arnold.Lankamp@cwi.nl
 *******************************************************************************/
-
+package org.rascalmpl.shell;
 
 import static org.rascalmpl.interpreter.utils.ReadEvalPrintDialogMessages.parseErrorMessage;
 import static org.rascalmpl.interpreter.utils.ReadEvalPrintDialogMessages.staticErrorMessage;
@@ -50,7 +49,6 @@ import org.rascalmpl.interpreter.control_exceptions.Throw;
 import org.rascalmpl.interpreter.env.GlobalEnvironment;
 import org.rascalmpl.interpreter.env.ModuleEnvironment;
 import org.rascalmpl.interpreter.load.RascalURIResolver;
-import org.rascalmpl.interpreter.load.StandardLibraryContributor;
 import org.rascalmpl.interpreter.result.Result;
 import org.rascalmpl.interpreter.staticErrors.CommandlineError;
 import org.rascalmpl.interpreter.staticErrors.StaticError;
