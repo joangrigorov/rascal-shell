@@ -20,10 +20,10 @@ The most recent release of Rascal Shell is to be found at: http://www.rascal-mpl
 - find the RascalShell class and select 'Run As Java Program'
 - edit the run configuration to use more stack and heap space: -Xss32m -Xmx1000m
 - select the rascal-shell project and choose "Export ..." from the context menu
-- select Java->Runnable jar, this starts a wizard
+- select Java->"Runnable JAR file", this starts a wizard
 - select your newly made run configuration from the top dropdown box
 - type an export destination, like ``/Users/jurgenv/Desktop/rascal-0.4.20.jar``
-- select "Package required libraries into generated jar"
+- select "Extract required libraries into generated JAR"
 - press "Finish"
 - an error dialog pops up; read the messages and ignore all "class file compiled with compiler warnings", but review the other messages
 - when satisfied, press "Ok", which brings you back to the main wizard.
