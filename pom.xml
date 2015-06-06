@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>rascal-shell</artifactId>
-	<version>0.7.2.qualifier</version>
+	<version>0.7.3.qualifier</version>
 	<packaging>eclipse-plugin</packaging>
 
 	<repositories>
@@ -113,12 +113,12 @@
 		<dependency>
 			<groupId>org.rascalmpl</groupId>
 			<artifactId>rascal</artifactId>
-			<version>0.7.2.qualifier</version>
+			<version>0.7.3.qualifier</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.imp</groupId>
 			<artifactId>org.eclipse.imp.pdb.values</artifactId>
-			<version>0.4.2.qualifier</version>
+			<version>0.4.3.qualifier</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tukaani</groupId>
