@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: rascal_shell
-Bundle-SymbolicName: rascal_shell;singleton:=true
+Bundle-Name: rascal-shell
+Bundle-SymbolicName: rascal-shell
 Bundle-Version: 0.7.3.qualifier
 Bundle-ClassPath: 
  lib/jline-2.13.jar
