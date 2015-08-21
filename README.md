@@ -12,7 +12,10 @@ You can run it from the comman line by typing:
 
 # Where to get it?
 
-The most recent release of Rascal Shell is to be found at: http://www.rascal-mpl.org/start
+There are two variants of the fully contained jar file for Rascal Shell: 
+- [rascal-shell-stable.jar](http://update.rascal-mpl.org/console/rascal-shell-stable.jar), the latest release
+- [rascal-shell-unstable.jar](http://update.rascal-mpl.org/console/rascal-shell-unstable.jar), the [unstable CI build](build.rascal-mpl.org/job/rascal-shell)
+
 
 # How to make it yourself?
 
