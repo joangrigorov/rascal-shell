@@ -12,7 +12,7 @@ You can run it from the comman line by typing:
 
 # Where to get it?
 
-The most recent release of Rascal Shell is to be found at: http://www.rascal-mpl.org/Rascal/Commandline
+The most recent release of Rascal Shell is to be found at: http://www.rascal-mpl.org/start
 
 # How to make it yourself?
 
