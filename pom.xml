@@ -172,7 +172,7 @@
 		</dependency>		
 		<dependency>
 			<groupId>commonmark</groupId>
-			<artifactId>commonmark</artifactId>
+			<artifactId>com.atlassian.commonmark</artifactId>
 			<version>0.3.0</version>
 		</dependency>		
 	</dependencies>
