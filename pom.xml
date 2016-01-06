@@ -171,8 +171,8 @@
 			<version>2.13</version>
 		</dependency>		
 		<dependency>
-			<groupId>commonmark</groupId>
-			<artifactId>com.atlassian.commonmark</artifactId>
+			<groupId>com.atlassian.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
 			<version>0.3.0</version>
 		</dependency>		
 	</dependencies>
