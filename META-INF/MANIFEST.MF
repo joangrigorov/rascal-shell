@@ -4,7 +4,8 @@ Bundle-Name: rascal-shell
 Bundle-SymbolicName: rascal-shell
 Bundle-Version: 0.8.0.qualifier
 Bundle-ClassPath: 
- lib/jline-2.13.jar
+ lib/jline-2.13.jar,
+ lib/commonmark-0.3.0.jar
 Export-Package: org.rascalmpl.shell
 Require-Bundle: 
  rascal;bundle-version="0.8.0"
