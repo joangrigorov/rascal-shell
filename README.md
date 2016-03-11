@@ -19,17 +19,17 @@ There are two variants of the fully contained jar file for Rascal Shell:
 
 # How to make it yourself?
 
-- check out the rascal-shell project
-- find the RascalShell class and select 'Run As Java Program'
-- edit the run configuration to use more stack and heap space: -Xss32m -Xmx1000m
-- select the rascal-shell project and choose "Export ..." from the context menu
-- select Java->"Runnable JAR file", this starts a wizard
-- select your newly made run configuration from the top dropdown box
-- type an export destination, like ``/Users/jurgenv/Desktop/rascal-0.4.20.jar``
-- select "Extract required libraries into generated JAR"
-- press "Finish"
-- an error dialog pops up; read the messages and ignore all "class file compiled with compiler warnings", but review the other messages
-- when satisfied, press "Ok", which brings you back to the main wizard.
-- now press "Cancel", and the jar will still be where you exported it to
-- test it
-- deploy
+- Check out the rascal-shell project
+- Find the RascalShell class and select 'Run As Java Program'
+- Edit the run configuration to use more stack and heap space: -Xss32m -Xmx1000m
+- Select the rascal-shell project and choose "Export ..." from the context menu
+- Select Java->"Runnable JAR file", this starts a wizard
+- Select your newly made run configuration from the top dropdown box
+- Type an export destination, like ``/Users/jurgenv/Desktop/rascal-0.4.20.jar``
+- Select "Extract required libraries into generated JAR"
+- Press "Finish"
+- An error dialog pops up; read the messages and ignore all "class file compiled with compiler warnings", but review the other messages
+- When satisfied, press "Ok", which brings you back to the main wizard.
+- Now press "Cancel", and the jar will still be where you exported it to
+- Test it
+- Deploy
