@@ -11,7 +11,7 @@
 
 	<groupId>org.rascalmpl</groupId>
 	<artifactId>rascal-shell</artifactId>
-	<version>0.8.0-SNAPSHOT</version>
+	<version>0.8.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 
