@@ -16,6 +16,7 @@ package org.rascalmpl.shell;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -25,6 +26,8 @@ import org.rascalmpl.interpreter.utils.RascalManifest;
 import org.rascalmpl.library.experiments.Compiler.Commands.Rascal;
 import org.rascalmpl.library.experiments.Compiler.Commands.RascalC;
 import org.rascalmpl.library.experiments.Compiler.Commands.RascalTests;
+import org.rascalmpl.library.experiments.Compiler.RVM.Interpreter.NoSuchRascalFunction;
+import org.rascalmpl.library.util.PathConfig;
 import org.rascalmpl.shell.compiled.CompiledREPLRunner;
 
 
@@ -59,11 +62,17 @@ public class RascalShell  {
             if (mf.hasManifest(RascalShell.class) && mf.hasMainModule(RascalShell.class)) {
                 runner = new ManifestRunner(mf, new PrintWriter(System.out), new PrintWriter(System.err, true));
             } 
-            else if (args.length > 0) {
-                if (args[0].equals("--rascalc")) {
+            else if (args.length > 0) {            	
+            	if (args[0].equals("--help")) {
+                    System.err.println("Usage: java -jar rascal-version.jar [{--rascalc, --rascal, --rascalTests, --compiledRepl}] [Module]");
+                    System.err.println("\ttry also the --help options of the respective commands.");
+                    System.err.println("\tjava -jar rascal-version.jar [Module]: runs the main function of the module using the interpreter");
+                    return;
+                }
+            	else if (args[0].equals("--rascalc")) {
                     runner = new ShellRunner() {
                         @Override
-                        public void run(String[] args) throws IOException {
+                        public void run(String[] args) {
                             RascalC.main(Arrays.copyOfRange(args, 1, args.length));
                         }
                     };
@@ -80,12 +89,16 @@ public class RascalShell  {
                     runner = new ShellRunner() {
                         @Override
                         public void run(String[] args) throws IOException {
-                            RascalTests.main(Arrays.copyOfRange(args, 1, args.length));
+                            try {
+                                RascalTests.main(Arrays.copyOfRange(args, 1, args.length));
+                            } catch (NoSuchRascalFunction | URISyntaxException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     };
                 }
                 else if (args[0].equals("--compiledREPL")) {
-                    runner = new CompiledREPLRunner(System.in, System.out, null);
+                    runner = new CompiledREPLRunner(new PathConfig(), System.in, System.out);
                     
                 }
                 else {

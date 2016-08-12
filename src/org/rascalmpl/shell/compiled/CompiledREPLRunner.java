@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 
-import org.rascalmpl.library.experiments.Compiler.Commands.PathConfig;
+import org.rascalmpl.library.experiments.Compiler.RVM.Interpreter.NoSuchRascalFunction;
 import org.rascalmpl.library.experiments.Compiler.RVM.Interpreter.repl.CommandExecutor;
 import org.rascalmpl.library.experiments.Compiler.RVM.Interpreter.repl.CompiledRascalREPL;
 import org.rascalmpl.shell.ShellRunner;
 import org.rascalmpl.library.experiments.Compiler.RVM.Interpreter.repl.debug.DebugREPLFrameObserver;
+import org.rascalmpl.library.util.PathConfig;
 
 import jline.TerminalFactory;
 
@@ -18,9 +20,9 @@ public class CompiledREPLRunner extends CompiledRascalREPL  implements ShellRunn
 	
 	private final DebugREPLFrameObserver debugObserver;
 	
-	public CompiledREPLRunner(InputStream stdin, OutputStream stdout, PathConfig pcfg) throws IOException {
-		super(stdin, stdout, true, true, getHistoryFile(), TerminalFactory.get(), pcfg);
-		debugObserver = new DebugREPLFrameObserver(reader.getInput(), stdout, true, true, getHistoryFile(), TerminalFactory.get(), new PathConfig());
+	public CompiledREPLRunner(PathConfig pcfg, InputStream stdin, OutputStream stdout) throws IOException, URISyntaxException {
+		super(pcfg, stdin, stdout, true, true, getHistoryFile(), TerminalFactory.get());
+		debugObserver = new DebugREPLFrameObserver(pcfg, reader.getInput(), stdout, true, true, getHistoryFile(), TerminalFactory.get());
 		executor.setDebugObserver(debugObserver);
 		setMeasureCommandTime(true);
 	}
@@ -39,8 +41,8 @@ public class CompiledREPLRunner extends CompiledRascalREPL  implements ShellRunn
 	}
 
 	@Override
-	protected CommandExecutor constructCommandExecutor(PrintWriter stdout, PrintWriter stderr) {
-		return new CommandExecutor(stdout, stderr);
+	protected CommandExecutor constructCommandExecutor(PathConfig pcfg, PrintWriter stdout, PrintWriter stderr) throws IOException, NoSuchRascalFunction, URISyntaxException {
+		return new CommandExecutor(pcfg, stdout, stderr);
 	}
 
 	@Override
