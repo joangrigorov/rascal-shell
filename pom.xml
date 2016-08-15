@@ -2,22 +2,48 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<parent>
+	<!-- <parent>
 		<relativePath>../rascal-pom-parent/pom.xml</relativePath>
 		<groupId>org.rascalmpl</groupId>
 		<artifactId>rascal-pom-parent</artifactId>
 		<version>1.1.0-SNAPSHOT</version>
-	</parent>
+	</parent> -->
 
+	<groupId>org.rascalmpl</groupId>
 	<artifactId>rascal-shell</artifactId>
-	<version>0.8.0-SNAPSHOT</version>
-	<packaging>eclipse-plugin</packaging>
+	<version>0.8.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
+	<scm>
+		<developerConnection>scm:git:https://github.com/usethesource/rascal-shell.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<!-- deployment configuration (usethesource) -->
+	<distributionManagement>
+		<repository>
+			<id>usethesource-releases</id>
+			<url>http://nexus.rascal-mpl.org/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>usethesource-snapshots</id>
+			<url>http://nexus.rascal-mpl.org/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- dependency resolution configuration (usethesource) -->
+	<repositories>
+		<repository>
+			<id>usethesource</id>
+			<url>http://nexus.rascal-mpl.org/repository/maven-public/</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<exec.mainClass>org.rascalmpl.shell.RascalShell</exec.mainClass>
 	</properties>
 
 	<build>
@@ -46,6 +72,19 @@
 									</manifestEntries>
 								</transformer>
 							</transformers>
+							<!--
+								http://zhentao-li.blogspot.nl/2012/06/maven-shade-plugin-invalid-signature.html
+							-->
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>							
 						</configuration>
 					</execution>
 				</executions>
@@ -54,7 +93,6 @@
 			<!-- 
 				Skip installation / deployment of shaded JAR.
 				Else a lot of 'duplicate classes' warnings would be displayed. 
-			 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -71,6 +109,7 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+			 -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -95,81 +134,17 @@
 		</plugins>
 	</build>
 
-	<!-- Used to trigger upstream projects in Jenkins  -->
 	<dependencies>
-		<!-- Rascal-Shell MANIFEST.MF Dependencies -->
+		<dependency>
+			<groupId>jline</groupId>
+			<artifactId>jline</artifactId>
+			<version>2.13</version>
+		</dependency>
 		<dependency>
 			<groupId>org.rascalmpl</groupId>
 			<artifactId>rascal</artifactId>
-			<version>0.8.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.rascalmpl</groupId>
-			<artifactId>value</artifactId>
-			<version>0.5.1</version>
-		</dependency>
-		<dependency>
-			<groupId>io.usethesource</groupId>
-			<artifactId>capsule</artifactId>
-			<version>0.1.0</version>
-		</dependency>								
-		<dependency>
-			<groupId>org.tukaani</groupId>
-			<artifactId>xz</artifactId>
-			<version>1.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-compress</artifactId>
-			<version>1.9</version>
-		</dependency>
-		<!-- <dependency>
-			<groupId>de.ruedigermoeller</groupId>
-			<artifactId>fst</artifactId>
-			<version>1.34</version>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>jline</groupId>
-			<artifactId>jline</artifactId>
-			<version>2.13</version>
-		</dependency> -->
-
-		<!-- Rascal MANIFEST.MF Dependencies -->
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-all</artifactId>
-			<version>5.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.icu</groupId>
-			<artifactId>icu4j</artifactId>
-			<version>52.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-math</artifactId>
-			<version>2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
-		<dependency>
-    		<groupId>com.github.ben-manes.caffeine</groupId>
-    		<artifactId>caffeine</artifactId>
-    		<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>de.ruedigermoeller</groupId>
-			<artifactId>fst</artifactId>
-			<version>2.42</version>
-		</dependency>
-		<dependency>
-			<groupId>jline</groupId>
-			<artifactId>jline</artifactId>
-			<version>2.13</version>
-		</dependency>			
+			<version>0.8.3-SNAPSHOT</version>
+		</dependency>	
 	</dependencies>
 
 </project>
