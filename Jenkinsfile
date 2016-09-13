@@ -11,8 +11,9 @@ node {
 
   stage 'Deploy'
   sh "mvn -s ${env.HOME}/usethesource-maven-settings.xml -B deploy"
+  slackSend (color: '#FFFF00', message: "Deployed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 
-  stage 'Archive'
-  step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+  // stage 'Archive'
+  // step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
   // step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 }
