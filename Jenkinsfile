@@ -11,7 +11,7 @@ node {
 
   stage 'Deploy'
   sh "mvn -s ${env.HOME}/usethesource-maven-settings.xml -B deploy"
-  slackSend (color: '#FFFF00', message: "Deployed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+  slackSend (message: "Deployed: rascal shell (${env.BUILD_URL})")
 
   // stage 'Archive'
   // step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
