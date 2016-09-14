@@ -21,3 +21,6 @@ target/
 dependency-reduced-pom.xml
 rascal-shell-current.jar
 
+#other stuff
+.DS_Store
+
