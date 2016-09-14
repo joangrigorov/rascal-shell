@@ -2,11 +2,11 @@
 
 	java -Xmx1G -Xss32m -jar rascal.jar
 
-(This will start a console). If you have a Rascal source module File.rsc with this function:
+This will start a console. If you have a Rascal source module File.rsc with this function:
 
 	public void main(list[str] args)
 
-You can run it from the comman line by typing:
+You can run it from the command line by typing:
 
 	java -Xmx1G -Xss32m -jar rascal.jar File.rsc arg1 arg2 …
 
@@ -20,7 +20,7 @@ There are two variants of the fully contained jar file for Rascal Shell:
 # How to make it yourself?
 
 - Check out the rascal-shell project
-- Find the RascalShell class and select 'Run As Java Program'
+- Find the RascalShell class and select "Run As Java Program"
 - Edit the run configuration to use more stack and heap space: -Xss32m -Xmx1000m
 - Select the rascal-shell project and choose "Export ..." from the context menu
 - Select Java->"Runnable JAR file", this starts a wizard
