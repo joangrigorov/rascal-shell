@@ -13,6 +13,15 @@ node {
   sh "mvn -s ${env.HOME}/usethesource-maven-settings.xml -B deploy"
   slackSend (message: "Deployed: rascal shell (${env.BUILD_URL})")
 
+  properties([
+    pipelineTriggers([
+      upstream(
+        threshold: hudson.model.Result.SUCCESS,
+        upstreamProjects: 'rascal-eclipse/master'
+      )
+    ])
+  ])
+
   // stage 'Archive'
   // step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
   // step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
