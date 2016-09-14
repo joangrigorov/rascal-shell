@@ -14,7 +14,7 @@ node {
 	  sh "mvn -s ${env.HOME}/usethesource-maven-settings.xml -B deploy"
 	  
 	  // check if the previous build ended in a failure, if so, notify that the build is back to normal
-	  if (currentBuild.getPreviousBuild().getResult() == "FAILURE") {
+	  if (currentBuild previousBuild result == "FAILURE") {
 		slackSend (color: '#00FF00', message: "BUILD BACK TO NORMAL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 	  }
 	  
