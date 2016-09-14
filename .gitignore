@@ -1,4 +1,4 @@
-# eclipse stuff
+# ECLIpse stuff
 .metadata
 bin/**
 tmp/**
@@ -8,6 +8,7 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
+.project
 .classpath
 .settings/
 .loadpath
@@ -15,3 +16,8 @@ local.properties
 # maven stuff
 target/
 /bin
+
+#build specific stuff
+dependency-reduced-pom.xml
+rascal-shell-current.jar
+
