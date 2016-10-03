@@ -14,7 +14,7 @@ You can run it from the command line by typing:
 
 There are two variants of the fully contained jar file for Rascal Shell: 
 - [rascal-shell-stable.jar](http://update.rascal-mpl.org/console/rascal-shell-stable.jar), the latest release
-- [rascal-shell-unstable.jar](http://update.rascal-mpl.org/console/rascal-shell-unstable.jar), the [unstable CI build](build.rascal-mpl.org/job/rascal-shell)
+- [rascal-shell-unstable.jar](http://update.rascal-mpl.org/console/rascal-shell-unstable.jar), the [unstable CI build![Build Status](http://ci.usethesource.io/job/usethesource/job/rascal-shell/job/master/badge/icon)](http://ci.usethesource.io/job/usethesource/job/rascal-shell/job/master/)
 
 
 # How to make it yourself?
